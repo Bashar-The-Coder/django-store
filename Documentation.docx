@@ -134,5 +134,14 @@ or go to the specific migration with
 2. delete the last migration in this case 0004
 3. delete the code which is applied in 
 
+
 This process is so shaddy so we need to add git versioning system
 after every lesson we should push the item in our git
+
+to go to one level up with git
+first we need to check the log with
+git log --oneline
+this show the list of commit made so far
+to go previous version now we need to type
+git reset --hard HEAD~1
+we want to go one step back so we write here 1
