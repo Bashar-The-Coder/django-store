@@ -1,0 +1,138 @@
+1. How web works?
+when client type a url (universal resource locator) on his browser and hit enter then the request goes to
+server and server process the request and give data as response to the client
+
+chapter-8
+activate pipenv 
+a. pipenv install django
+b. activate- pipenv shell
+c. django-admin startproject storefront .
+d. python manage.py runserver 8080 > port number is optional
+e. here manage.py is a python wrapper
+
+chapter-10
+#create an app
+a. python manage.py startapp playground
+b. register my app on settings.py on Installed app "playground.apps.PlaygroundConfig"
+
+Chapter -11
+create the view function which is create or pull data from database  and transform data or send email
+
+
+Ch- 12
+mapping url to views. here we will create a urls.py file in our playground app folder and map
+urlpatterns add path function and give route parameter which is a string called hello
+and trigger the function with views.say_hello parameter
+
+ch-13
+create  templates folder in playground app folder and create index.html file on that folder
+and return render function in views
+
+lesson-14 debuging
+    on views.py lets click on debuging and open launch.json file and add aditional arguments after runserver 9000 that is for 
+    not collision in port number
+
+lesson-15 extra debug tool
+    or install pipenv install django-debug-toolbar
+    add "debug_toolbar" in settings/ainstalled_apps
+    add  path('__debug__/', include('debug_toolbar.urls')), in urls.py 
+    add import debug_toolbar in urls.py file
+    add "debug_toolbar.middleware.DebugToolbarMiddleware", in middleware on the top of 
+    add INTERNAL_IPS = [
+        # ...
+        "127.0.0.1",
+        # ...
+    ] in settings file
+
+lesson-16 modeling
+
+lesson-17  
+Building relationship between modeling
+
+a. cart can have different product
+b. product might have different cart
+so there is many to many relationship between product and cart
+sometimes the relationship between two entity can have attribute cart item or quantity
+cart item will be association class
+
+# lesson 18
+we break down our apps in two part. one is store and second one is tags. to breakdown monolith.
+every time we add apps in our project we should add those app in our project installed app
+
+# lesson 20 
+create models on store
+
+# lesson 23 one to many relationship
+one customer can have multiple address
+now
+create below relationship
+a collection can have multiple product
+a customer can have multiple order
+an order can have multiple item
+a cart can have multiple item
+
+Collection - Product
+Customer - Order
+Order - Item
+Cart - Item
+
+
+# Lesson 24 -- Resolving Circular relationship
+
+In product and collection model the relationship is
+one collection has many product 
+if we need one product has many collection relationship
+then it will be need Circular dependency
+
+# lesson 25 Generic Relationship
+we create two model in our tag app
+1. Tag
+2. TaggedItem
+
+in tagged item class we can identify what Tag is
+applied to what object
+to determine the we simply add tag as foreign key
+
+create another app liked and create model likeditem as well as like taggeditem
+
+# lesson 26---> setting up database
+here we createing migrations
+running migrations
+reversing migrations
+populating the database
+
+# lesson 27---> setting up database
+creating migrations 
+add slugfield in product
+add likes app in setting
+create manage.py migrate
+another command is python manage.py sqlmigrate
+which generate actual sql code at runtime
+
+lesson-30
+excercise
+add zip to address\
+create migrations run it
+inspect the migrations table
+
+##lesson-31
+
+sometimes we need more control over the db schema
+for example override the name of table or want to add index
+couple of column and so on
+
+we can use class Meta in this case inner a class
+after adding meta we need to migrations
+
+# lesson -32 Undo the migrations
+
+to undo the migrations just delete the 
+meta class and run migrations
+
+or go to the specific migration with 
+1. python manage.py migrate store 0003
+2. delete the last migration in this case 0004
+3. delete the code which is applied in 
+
+This process is so shaddy so we need to add git versioning system
+after every lesson we should push the item in our git
