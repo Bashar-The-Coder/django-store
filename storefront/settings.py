@@ -61,7 +61,7 @@ ROOT_URLCONF = "storefront.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR , "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,6 +86,9 @@ WSGI_APPLICATION = "storefront.wsgi.application"
 #         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+
+
 
 
 DATABASES = {
